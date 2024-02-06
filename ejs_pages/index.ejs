@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TASKLIST</title>
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+    <header>
+        <p>с возвращением</p>
+    </header>
+
+    <div  id="task_box">
+
+        <% tasks.forEach(task => { %>
+            <div class="task">
+                <p class="task_text"><%= task.task %></p>
+                <p class="task_time"><%= task.date.toLocaleDateString() %>  <%= task.date.toLocaleTimeString() %></p>
+                <button class="delete_this_task" onclick="delete_this_task(this)">удалить это</button>
+                <p class="n_task"><%= task.id %></p>
+            </div>
+        <% }); %>
+
+
+
+
+        <span id="add_task_button" onclick="open_create_new_task_bar()">
+            <p>Добавить новое</p>
+        </span>
+    </div>
+
+
+    <!--форма для создания нового задания-->
+    <div id="new_task_bar" >
+        <div id="new_task_bar_form_holder">
+            <span onclick="close_create_new_task_bar()">❌</span>
+            <br>
+            <br>
+            <br>
+            <p id="text_new_task_text">введите текст задачи</p>
+            <br>
+            <br>
+            <textarea id="new_task_text"></textarea>
+            <br>
+            <br>
+            <p id="text_set_deadline">выберете дедлайн</p>
+            <br>
+            <br>
+            <input type="datetime-local" id="new_task_deadline">
+            <br>
+            <br>
+            <button id="new_task_bar_create_button" onclick="create_new_task()">записать</button>
+        </div>
+    </div>
+
+    <script>
+        // создание и удаление заданий
+        function close_create_new_task_bar(){
+            document.getElementById('new_task_bar').style.display = 'none';
+        }
+        function delete_this_task(delete_button){
+
+            const nTaskValue = delete_button.parentElement.querySelector('.n_task').innerText;
+
+            fetch(`/delete_row/${nTaskValue}`, {
+                method: 'DELETE',
+            })
+                .then
+            delete_button.parentNode.remove(); // обращение к родительскому объекту и его удаление
+
+
+        }
+        function open_create_new_task_bar() {
+            var newTaskBar = document.getElementById('new_task_bar').style.display = 'flex';
+        }
+
+        function create_new_task(){
+            var new_task_text = document.getElementById('new_task_text').value;
+            var new_task_deadline = document.getElementById('new_task_deadline').value;
+            console.log(new_task_text + "  " + new_task_deadline)
+
+            const data = {
+                new_task_text: new_task_text,
+                new_task_deadline: new_task_deadline
+            };
+            // Опции запроса
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                    // Другие необходимые заголовки
+                },
+                body: JSON.stringify(data)
+            };
+
+            fetch('/create_new_row', options)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Ошибка при создании новой задачи');
+                    }
+                    return response.json(); // Вернем результат обработки сервером, если необходимо
+                })
+                .then(data => {
+                    console.log('Задача успешно создана:', data);
+                    location.reload();
+                })
+                .catch(error => console.error(error));
+
+
+        }
+
+    </script>
+    <script> //скрипт изначальной загрузки с бд
+
+    </script>
+</body>
+</html>

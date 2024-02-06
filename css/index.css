@@ -1,0 +1,193 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+/*очень важный код, убирает отступы и прочее по умолчанию из браузеров*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    background-color: coral;
+    height: 10vw;
+    padding: 0;
+    margin: 0;
+}
+
+header>p{
+    font-family: Bahnschrift;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Используйте align-items вместо align-content */
+    height: 100%;
+}
+
+
+/*див для всех заданий*/
+#task_box{
+    justify-content: center;
+    flex-wrap: wrap;
+    display: flex;
+    width: 90%;
+    height: auto;
+    background-color: orange;
+    margin: auto;
+    margin-top: 10px;
+    border: solid 5px black;
+
+}
+
+
+
+
+/*само задание*/
+.task{
+    display: flex;
+    margin: 20px 20px 20px 20px;
+    background-color: darkgrey;
+    width: 280px;
+    height: 280px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+.task> * {
+    flex-shrink: 1;
+/*    уменьшение объектов чтобы всегда влазили, такое себе*/
+}
+
+.task_text{
+    font-family: Bahnschrift;
+    font-size: 22px;
+    border: solid 2px black;
+    border-radius: 5px;
+    width: 90%;
+    height: 70%;
+    background-color: red;
+    margin: 10px 10px 60px 10px;
+    word-wrap: break-word;
+}
+
+.task_time{
+    position: relative;
+    right: 10%;
+    bottom: 10%;
+    font-family: Bahnschrift;
+
+}
+.delete_this_task{
+
+    position: relative;
+    bottom: 10%;
+    left: 10%;
+    font-family: Bahnschrift;
+    border-radius: 10%;
+}
+
+
+/*кнопка добавления*/
+
+#add_task_button {
+     margin: 20px 20px 20px 20px;
+     background-color: blueviolet;
+     height: 280px;
+     width: 280px;
+     transition: all 0.3s;
+     /*    свойсво говорит css что каждое изменение стиля будет длиться 0.5 с*/
+ }
+
+#add_task_button>p{
+    font-family: Bahnschrift;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+}
+
+#add_task_button:hover{
+    border: solid 5px black;
+    background-color: white;
+    cursor: pointer;
+}
+
+.n_task{
+    position: relative;
+    bottom: 50px;
+    right: 70%;
+    font-family: Bahnschrift;
+}
+
+
+/*окно ввода данных нового задания*/
+
+#new_task_bar{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    border: solid 1px black;
+    background-color: white;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+#new_task_bar>div{
+
+    height: 500px;
+    width: 500px;
+    background-color: orange;
+    border: solid 2px black;
+    border-radius: 5px;
+
+
+}
+
+#new_task_bar>div>p{
+    font-family: Bahnschrift;
+    font-size: 40px;
+    text-align: center;
+}
+#new_task_bar>div>textarea{
+    font-family: Bahnschrift;
+    font-size: 20px;
+    height: 90px;
+    width: 400px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#new_task_bar>div>{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#new_task_deadline{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#new_task_bar>div>button{
+    font-family: Bahnschrift;
+    font-size: 20px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#new_task_bar>div>span{
+
+    position: relative;
+    top: 5%;
+    left: 90%;
+}
+#new_task_bar>div>span:hover{
+    cursor: pointer;
+}
